@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.notice_left{
+	width:70%;
+	min-height:300px;
+	display:inline-block;
+	
+}
+
+.table_notice{
+	border:solid 1px black;
+}
+
+.table_notice tr, td, th{
+	border:solid 1px black;	
+}
+
+.table_notice > thead > tr{
+	text-align:center;
+}

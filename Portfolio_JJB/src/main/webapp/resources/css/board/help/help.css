@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+#body{
+	width:80%;
+	background-color:white;
+	padding:2%;
+	margin-left:10%
+}
+
+#help_table thead{
+	text-align:center;
+	color:white;
+	background-color:#303030;
+}
+
+#help_table{
+	font-size:13px;
+}
+
+#help_table h6{
+	border-weight:bold;
+	display: inline;
+}
+
+.help_answerRow{
+	display:none;
+}
+
+.help_answer{
+	display:inline;
+}

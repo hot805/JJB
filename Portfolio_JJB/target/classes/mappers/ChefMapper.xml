@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjb.mapper.ChefMapper">
+
+	<select id="chefListPaging" resultType="com.jjb.model.ChefVO">
+		select a.rownum, a.chefno, a.userid, a.nickname, a.followno,
+		a.regdate, a.profileImg,
+		case when (a.userid = any (select chef_followed from
+		follow_user where
+		userid=#{userid})) then 'Y' else 'N' end as
+		follow_check,
+		ifnull(b.tableno,0) as tableno
+		from(select
+		@rownum:=@rownum+1 as rownum,
+		chefno, userid, nickname, followno,
+		regdate, profileImg
+		from (select @rownum:=0) as
+		rownum, tbl_chef) a left
+		join (select count(*) as tableno,userid from
+		tbl_board_notice) b on
+		a.userid = b.userid 
+		<![CDATA[
+		where rownum>(#{cri.pageNum}-1)*#{cri.amount} and
+		rownum<=#{cri.pageNum}*#{cri.amount} 
+		]]>
+		order by
+		
+		<choose>
+			<when test="ordernum == 0">
+				regdate
+			</when>
+			<when test="ordernum == 1">
+				followno
+			</when>
+			<otherwise>
+				tableno
+			</otherwise>
+		</choose>
+
+		desc
+	</select>
+	
+	<select id="cheflist" resultType="com.jjb.model.ChefVO">
+		select chefno, userid, nickname, followno, tableno, regdate,
+		case when
+		(userid = any (select chef_followed from follow_user where
+		userid=#{userid}))
+		then 'Y' else 'N' end as follow_check
+		from tbl_chef
+		order by
+		<choose>
+			<when test="ordernum == 0">
+				regdate
+			</when>
+			<when test="ordernum == 1">
+				followno
+			</when>
+			<otherwise>
+				tableno
+			</otherwise>
+		</choose>
+		desc;
+
+	</select>
+
+	<select id="chefCount" resultType="int">
+		select count(*) from tbl_chef;
+	</select>
+	
+	<insert id="follow">
+		insert into follow_user (userid, chef_followed) values (#{userid}, #{chef_followed});
+	</insert>
+	
+	<delete id="unfollow">
+		delete from follow_user where userid=#{userid} and chef_followed=#{chef_followed};
+	</delete>
+	
+	<update id="follownum">
+		update tbl_chef set followno = (select count(*) from follow_user where chef_followed = #{chef_followed}) where userid = #{chef_followed}
+	</update>
+
+</mapper>

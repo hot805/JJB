@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+#body{
+	background-color:white;
+	padding:1% 2%;
+}
+
+.recipe_content{
+	width:100%;
+	min-height:800px;
+	margin:5% 0%;
+}
+
+.recipe_orderby{
+	float:right;
+}
+
+.recipe_foreach{
+	width:90%;
+	
+}
+
+.recipe_items{
+	width:32%;
+	padding:2.5% 0%;
+	margin-right:0.7%;
+	display:inline-block;
+	cursor:pointer;
+}
+
+.recipe_items > img{
+	width:100%;
+	height:250px;
+}
+
+.ListAtag > span{
+	font-size:17px;
+	border : solid 1px #00c400;
+	color:#00c400;
+	border-radius:10px;
+	padding:4px;
+}
+
+.ListAtag > .iconTotal{
+	font-size:16px;
+	border : solid 1px #00c400;
+	background-color:#00c400;
+	padding:4px;
+	color:white;
+	border-radius:5px;
+}
+
+.ListAtag > .iconList{
+	color:#b8b8b8;
+}
+
+.recipe_foreach{
+	width:100%;
+}
+
+.recipe_order{
+	float:right;
+	margin: 2% 0%;
+}
+
+.recipe_order > a{
+	font-size:18px;
+	font-weight:bold;
+}
+
+.recipe_items > div{
+	font-size:15px;
+	font-weight:bold;
+}
+
+.recipe_items > div > span{
+	font-size:13px;
+	color:#d2d2d2;
+	font-weight:normal;
+}
+
+.recipe_background{
+	padding: 2% 4%;
+	margin:3% 0%;
+	background-color:white;
+}
+
+.recipe_background h5{
+	display:inline-block;
+	border-radius:10px;
+}
+
+.recipe_background > input{
+	float:right;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjb.mapper.UserMapper">
+	<select id="login" resultType="com.jjb.model.UserVO">
+		select userid, userpw, nickname, qualify 
+		from tbl_user 
+		where userid=#{userid} 
+		and userpw=#{userpw}
+	</select>
+	
+	<insert id="signUp">
+		insert into tbl_user 
+		(userid, userpw, username, nickname, email, addr1, addr2, addr3, rdate) 
+		values (#{userid},#{userpw},#{username},#{nickname},#{email},#{addr1},#{addr2},#{addr3}, sysdate());
+	</insert>
+	
+	<select id="checkID" resultType="String">
+		select userid from tbl_user where userid=#{userid};
+	</select>
+	
+	<select id="checkNick" resultType="String">
+		select nickname from tbl_user where nickname=#{nickname};
+	</select>
+	
+	<select id="checkPW" resultType="String">
+		select userpw from tbl_user where userid=#{userid};
+	</select>
+	
+	<select id="InfoFromId" resultType="com.jjb.model.UserVO">
+		select userid, email, addr1, addr2, addr3 from tbl_user where userid=#{userid};
+	</select>
+	
+	<update id="changeInfo">
+		update tbl_user set nickname=#{nickname}, email=#{email}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3} where userid = #{userid};
+	</update>
+	
+	<update id="changePw">
+		update tbl_user set userpw=#{newPw} where userid=#{userid}; 
+	</update>
+	
+	<delete id="deleteUser">
+		delete from tbl_user where userid=#{userid};
+	</delete>
+	
+</mapper>

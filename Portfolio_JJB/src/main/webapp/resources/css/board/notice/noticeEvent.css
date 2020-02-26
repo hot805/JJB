@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+.row_event {
+	padding: 1%;
+}
+
+.img_event {
+	width: 40%;
+	border: solid 1px gray;
+	margin-right: 2%;
+	display: inline-block;
+}
+
+.img_event img {
+	width: 100%;
+	height: 150px;
+}
+
+.content_event {
+	width: 56%;
+	display: inline-block;
+}
+
+#body{
+	width:80%;
+	margin-left:15%;
+	background-color:white;
+	padding:2%
+}
+
+.notice_right li{
+	text-align:center;
+}
+
+.left_menu{
+	background-color:#f8f8f8;
+	display:none;
+}

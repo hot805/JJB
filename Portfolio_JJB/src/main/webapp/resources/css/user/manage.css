@@ -1,0 +1,20 @@
+@charset "EUC-KR";
+
+.section_margin1{
+	margin-top:5%;
+	text-align:center
+}
+
+.section_margin2{
+	margin-top:10%;
+	text-align:center;
+}
+
+.seciont_margin1 div{
+	margin-right : 1%;
+}
+
+.aTagManage{
+	font-size:20px;
+	color:black;
+}

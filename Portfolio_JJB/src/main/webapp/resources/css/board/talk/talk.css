@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.talk_background{
+	padding: 2% 4%;
+	margin:3% 0%;
+	background-color:white;
+}
+
+.talk_background h5{
+	display:inline-block;
+	border-radius:10px;
+}
+
+.talk_background > input{
+	float:right;
+}
+
+.fortalk{
+	width:100%;
+	padding:2% 5%;
+	overflow:hidden;
+	background-color:white;
+	margin-top:3%;
+}
+
+.talk_profile{
+	position:relative;
+	float:left;
+	width:75px;
+	height:75px;	
+}
+
+.talk_all{
+	position:relative;
+	display:inline-block;
+	float:left;
+	margin-left:2%;
+	width:83%;
+}
+
+.talk_nickname{
+	margin-top:7%;
+	font-size:18px;	
+}
+
+.talk_udate{
+	font-size:13px;
+	color:#d2d2d2;
+}
+
+.talk_content{
+	margin-top:5%;
+}
+
+.talk_all > a > img{
+	width:90%;
+	height:300px;
+	margin-top:5%;
+}

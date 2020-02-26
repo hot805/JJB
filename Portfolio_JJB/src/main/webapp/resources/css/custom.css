@@ -1,0 +1,25 @@
+@charset "EUC-KR";
+<link href="https://fonts.googleapis.com/css?family=Cute+Font|Kirang+Haerang|Nanum+Gothic|Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+* {
+	margin :0;
+	padding : 0;
+}
+
+#top{
+	/*background-image:url('../image/flowers-4634053_640.png');*/
+	text-align:center;
+	padding : 50px 10px ;
+}
+
+
+
+#collapsibleNavbar ul{
+	width:100%;
+	text-align:center
+}
+
+#collapsibleNavbar ul li{
+	width:16%;
+}
+

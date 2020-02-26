@@ -1,0 +1,22 @@
+@charset "UTF-8";
+#body{
+	width:80%;
+	margin-left:15%;
+	background-color:white;
+	padding:2%
+}
+
+#dataTable > thead{
+	text-align:center;
+	color:white;
+	background-color:#303030;
+}
+
+.notice_right li{
+	text-align:center;
+}
+
+.left_menu{
+	background-color:#f8f8f8;
+	display:none;
+}

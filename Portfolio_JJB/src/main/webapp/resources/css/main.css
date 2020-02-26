@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+/*메인*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html { overflow-y:scroll; }
+
+html, body {
+	height: 100%;
+}
+
+a{
+	color: black;
+	text-decoration:none;
+}
+
+#header {
+	height: 20%;
+}
+
+.mainNav a {
+	color: black;
+	font-size: 94%;
+}
+
+.myHeader {
+	background-color: #ffffff;
+	height: 100%;
+	padding-left: 15%;
+}
+
+#myHeader_Mid {
+	padding-top: 5%;
+	height: 100%;
+}
+
+.imgLogo {
+	width: 25%;
+	height: 50%;
+}
+
+.group_Header_search {
+	display: inline;
+}
+
+.header_search {
+	display: inline;
+	width: 30%;
+}
+
+#header_menuBar {
+	height: 10%;
+	background-color: #303030;
+}
+
+.header_searchAtag{
+	margin: 1% 0 0 27%;
+}
+
+.header_searchAtag a{
+	font-size:13px;
+}
+
+/*메뉴 바 */
+#header_menuBar>ul {
+	list-style-type: none;
+	background-color: #333;
+}
+
+#header_menuBar>ul:after {
+	display: block;
+	clear: both;
+}
+
+#header_menuBar li {
+	float: left;
+	width: 16%;
+}
+
+#header_menuBar li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 10%;
+	text-decoration: none;
+}
+
+/*메뉴 바 끝*/
+
+/*footer*/
+#footer {
+	left: 0;
+	bottom: 0;
+	background-color: #303030;
+	width:100%;
+	height: 12%;
+	color:white;
+	text-align:center;
+	
+}
+
+#footer > div{
+	padding:3%;
+}
+/*footer 끝*/
+#body_bkground{
+	background-color:#fbfbfb;
+	margin:0;
+	padding:5% 3%;
+}
+
+#body{
+	min-height:70%;
+	margin-left:20%;
+	width:60%;
+}
+/*메인 끝*/
+
+/*로그인*/
+
+#myLogin1{
+	margin-top:3%;
+	text-align:center;
+}
+
+#myLogin1 > input{
+	width:30%;
+	padding:1%;
+	border-radius:0.25em;
+} 
+
+#myLogin1 > input[value=로그인]{
+	background-color:#008000;
+	color:white;	
+}
+#myLogin1 > input[value=회원가입]{
+	background-color:#2626ff;	
+	color:white
+}
+/*로그인*/
