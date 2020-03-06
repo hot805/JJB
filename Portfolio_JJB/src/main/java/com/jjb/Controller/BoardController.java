@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjb.model.BoardVO;
 import com.jjb.model.Criteria;
@@ -31,62 +32,43 @@ public class BoardController {
 	// 공지사항
 	@RequestMapping(value="/")
 	public String noticeBoardGET( BoardVO board, Model model,Criteria cri,HttpSession session) throws Exception{
-		System.out.println("공지사항임당 "+cri.toString());
-		System.out.println(cri.getKeyword());
 		String bsection="";
-		String location="";
-		System.out.println("나는 "+board.getSection());
-		System.out.println(board);
-		
+		String location="";	
 		if(cri.getKeyword() != null) {
 			Map<String,Object> search = new HashMap<>();
 			search.put("keyword", cri.getKeyword());
 			search.put("userid", session.getAttribute("userid"));
 			bservice.searchKeyword(search);
 		}
-		
 		if(board.getSection().equals("B4-01")) {
 			bsection = "tbl_board_notice";
 			location="/board/notice";
-		}
-		
-		else if(board.getSection().equals("B4-02")||board.getSection().equals("B4-03")||board.getSection().equals("B4-04")) {
+		}else if(board.getSection().equals("B4-02")||board.getSection().equals("B4-03")||board.getSection().equals("B4-04")) {
 			bsection = "tbl_board_event";
 			location="/board/noticeEvent";
-		}
-		
-		else if(board.getSection().equals("B3-01")) {
+		}else if(board.getSection().equals("B3-01")) {
 			bsection = "tbl_talk";
 			location="/board/talk";
-		}
-		
-		else if(board.getSection().equals("B2-01")) {
+		}else if(board.getSection().equals("B2-01")) {
 			bsection = "tbl_recipe";
 			location="/board/recipe";
 			cri.setAmount(12);
-		}
-			
-		else if (board.getSection().equals("B6-01")) {
+		}else if (board.getSection().equals("B6-01")) {
 			bsection = "tbl_help";
 			location = "board/help";
 		}
-		
 		Map<String,Object> ParamMap = new HashMap<>();
 		ParamMap.put("cri", cri);
 		ParamMap.put("board", board);
 		ParamMap.put("bsection",bsection);
 		ParamMap.put("bsNum",board.getSection());
 		ParamMap.put("sessionid", session.getAttribute("userid"));
+		ParamMap.put("sessionqualify", session.getAttribute("qualify"));
 		
 		int total = bservice.boardCount(ParamMap);
-		System.out.println(total);
 		PageVO pv = new PageVO(cri, total); 
-		
-		System.out.println("리스트는 "+bservice.boardListPaging(ParamMap));
-		
+	
 		if(board.getSection().equals("B2-01") && board.getOrderno() == 03) {
-			System.out.println("좋아요3333");
-			System.out.println(bservice.likePaging(ParamMap));
 			model.addAttribute("list",bservice.likePaging(ParamMap));
 		}else {
 			model.addAttribute("list",bservice.boardListPaging(ParamMap));
@@ -95,15 +77,139 @@ public class BoardController {
 		
 		return location;
 	}
+	
+	@RequestMapping(value="/write",method=RequestMethod.GET)
+	public String boardWriteGET(BoardVO board, Model model) throws Exception{
+		System.out.println("boardWrite 돌입");
+		String section = board.getSection();
+		String location="";
+		if(section.equals("B4-01") || section.equals("B6-01")) {
+			location = "board/boardWrite";
+		}else {
+			location = "board/boardWrite_Event";
+		}
+		System.out.println(section);
+		model.addAttribute("section",section);
+		
+		return location;
+	}
+	
+	@RequestMapping(value="/writeBasic",method=RequestMethod.GET)
+	public String writeBasicGET(BoardVO board, Model model) throws Exception{
+		System.out.println("writeBasic 돌입");
+		String section = board.getSection();
+		String location="";
+		if(section.equals("B4-01") || section.equals("B6-01")) {
+			location = "board/boardWrite";
+		}else {
+			location = "board/boardWrite_Event";
+		}
+		System.out.println(board);
+		model.addAttribute("section",section);
+		
+		return location;
+	}
+	
+	@RequestMapping(value="/modifyBasic",method=RequestMethod.GET)
+	public String modifyBasicGET(BoardVO board, Model model) throws Exception{
+		System.out.println("modifyBasic 돌입");
+		String section = board.getSection();
+		String location="";
+		if(section.equals("B4-01") || section.equals("B6-01")) {
+			location = "board/boardModify";
+		}else {
+			location = "board/boardModify_Event";
+			System.out.println("dd");
+		}
+		System.out.println(board);
+		model.addAttribute("board",board);
+		
+		return location;
+	}
+	
+	@RequestMapping(value = "/writeBasic", method = RequestMethod.POST)
+	public String boardWriteBasicPOST(BoardVO board, HttpSession session,RedirectAttributes redirect){
+		System.out.println("board : "+board);
+		String bsection = "";
+		String fail ="";
+		String success ="";
+		if (board.getSection().equals("B4-01")) {
+			bsection = "tbl_board_notice";
+			fail="4-1";
+			success="4-2";
+		}
+		else if (board.getSection().equals("B6-01")) {
+			bsection = "tbl_help";
+			fail="6-1";
+			success="6-2";
+		}
+		else if (board.getSection().equals("B4-02") || board.getSection().equals("B4-03") || board.getSection().equals("B4-04") ) {
+			bsection = "tbl_board_Event";
+			fail="4-21";
+			success="4-22";
+		}
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("board", board);
+		paramMap.put("userid", session.getAttribute("userid"));
+		paramMap.put("nickname", session.getAttribute("nickname"));
+		paramMap.put("profileImg", session.getAttribute("profileImg"));
+		paramMap.put("bsection",bsection);
+		
+		try {
+			bservice.boardWriteBasic(paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirect.addAttribute("msg",fail);
+		}
+		redirect.addAttribute("msg",success);
+		return "redirect:/index";
+	}
+	
+	@RequestMapping(value="/modifyBasic",method=RequestMethod.POST)
+	public String modifyBasicPOST(BoardVO board, Model model,RedirectAttributes redirect, HttpSession session){
+		System.out.println("modifyBasic 돌입");
+		System.out.println("board : "+board);
+		String bsection = "";
+		String fail ="";
+		String success ="";
+		if (board.getSection().equals("B4-01")) {
+			bsection = "tbl_board_notice";
+			fail="4-3";
+			success="4-4";
+		}
+		else if (board.getSection().equals("B6-01")) {
+			bsection = "tbl_help";
+			fail="6-3";
+			success="6-4";
+		}
+		else if (board.getSection().equals("B4-02") || board.getSection().equals("B4-03") || board.getSection().equals("B4-04") ) {
+			bsection = "tbl_board_Event";
+			fail="4-23";
+			success="4-24";
+		}
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("board", board);
+		paramMap.put("bsection",bsection);
+		
+		try {
+			bservice.boardModifyBasic(paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirect.addAttribute("msg",fail);
+		}
+		redirect.addAttribute("msg",success);
+		return "redirect:/index";
+	}
 
 	// 게시판 작성
 	@ResponseBody
 	@RequestMapping(value = "/write", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public void boardWritePOST(BoardVO board, HttpSession session) throws Exception {
-		System.out.println("게시판 글 작성");
-		System.out.println("fff" + board);
 		String userid = (String) session.getAttribute("userid");
 		String nickname = (String) session.getAttribute("nickname");
+		String profileImg = (String) session.getAttribute("profileImg");
 		String bsection = "";
 		if (board.getSection().equals("B3-01")) {
 			bsection = "tbl_talk";
@@ -118,9 +224,9 @@ public class BoardController {
 		paramMap.put("nickname", nickname);
 		paramMap.put("bsection", bsection);
 		paramMap.put("bsNum", board.getSection());
+		paramMap.put("profileImg", profileImg);
 
 		bservice.boardWrite(paramMap);
-
 	}
 
 	@ResponseBody
@@ -154,6 +260,18 @@ public class BoardController {
 		
 		else if (board.getSection().equals("B2-01")) {
 			bsection = "tbl_recipe";
+		}
+		
+		else if (board.getSection().equals("B4-01")) {
+			bsection = "tbl_board_notice";
+		}
+		
+		else if (board.getSection().equals("B6-01")) {
+			bsection = "tbl_help";
+		}
+		
+		else if (board.getSection().equals("B4-02") || board.getSection().equals("B4-03") || board.getSection().equals("B4-04") ) {
+			bsection = "tbl_board_event";
 		}
 
 		Map<String, Object> paramMap = new HashMap<>();
@@ -331,8 +449,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/unlike", method=RequestMethod.GET)
 	public void unlikeGET(BoardVO board, HttpSession session) throws Exception {
-		System.out.println("좋아요 취소 돌입 "+board);		
-		
 		Map<String, Object> like = new HashMap<>();
 		like.put("board", board);
 		like.put("userid", session.getAttribute("userid"));
@@ -343,12 +459,24 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/like", method=RequestMethod.GET)
 	public void likeGET(BoardVO board, HttpSession session) throws Exception {
-		System.out.println("좋아요 돌입 "+board);
-		
 		Map<String, Object> like = new HashMap<>();
 		like.put("board", board);
 		like.put("userid", session.getAttribute("userid"));
 		
 		bservice.like(like);
+	}
+	
+	@RequestMapping(value="/insertImg", method = RequestMethod.GET)
+	public String insertImgGET() throws Exception{
+		System.out.println("insertImg 돌입");
+		return "/board/eventInsertImg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/help_answer", method = RequestMethod.POST)
+	public void help_answerGET(BoardVO board) throws Exception{
+		System.out.println("help_answer 돌입");
+		System.out.println(board);
+		bservice.help_answer(board);
 	}
 }

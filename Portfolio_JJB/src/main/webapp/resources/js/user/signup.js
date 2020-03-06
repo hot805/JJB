@@ -7,7 +7,7 @@ var nickBool = false;
 var emailBool = false;
 
 //타이머 관련 변수
-var num = 10 * 1; // 몇분을 설정할지의 대한 변수 선언
+var num = 60 * 3; // 몇분을 설정할지의 대한 변수 선언
 var myVar;
 var randomNum;
 //타이머 관련 변수 끝

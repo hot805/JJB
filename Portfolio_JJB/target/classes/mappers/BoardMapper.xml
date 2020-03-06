@@ -11,15 +11,10 @@
 	</select>
 
 	<select id="boardListPage" resultType="com.jjb.model.BoardVO">
-		<!-- CDATA를 사용해야 부등호 표시(크다,작다)와 닫거나 열거나할때의 <>를 구분해줄수 있음 -->
-
 		select *
-		from (select @rownum:=@rownum+1 as
-		rownum, bno, content,
-		nickname,
-		regdate, udate,section
+		from (select @rownum:=@rownum+1 as rownum, bno, content, nickname, regdate, udate, section
 		<if test="bsNum == 'B2-01'">
-			, imgname, userid, category
+			,imgname, userid, category
 		</if>
 		<if test="bsNum == 'B3-01'">
 			,contentImg, imgname, userid,profileImg
@@ -27,31 +22,24 @@
 		<if test="bsNum == 'B4-01'|| bsNum == 'B2-01'">
 			,title, cnt
 		</if>
-
 		<if test="bsNum == 'B4-02' || bsNum == 'B4-03' || bsNum == 'B4-04'">
-			,title, cnt, userid,filename, imgname
-		</if>
-		
+			,title, cnt, userid,filename, imgname, duration
+		</if>	
 		<if test="bsNum == 'B6-01'">
 			,title, userid, answer
-		</if>
-		
-		from (select @rownum:=0) as rownum
-		, ${bsection}
-		where section =
-		#{bsNum}
-
+		</if>		
+		from (select @rownum:=0) as rownum, ${bsection}	where section =	#{bsNum}
 		<if test="cri.keyword!=null">
 			and title like concat('%',#{cri.keyword},'%')
 		</if>
 		<if test="board.category!=null">
 			and category like concat('%',#{board.category},'%')
 		</if>
-		<if test="bsNum == 'B6-01'">
+		<if test="bsNum == 'B6-01' and sessionqualify lt 2">
 			and userid=#{sessionid}
 		</if>
 		order by <choose>
-				<when test="order == 1">
+				<when test="board.orderno == 2">
 					cnt
 				</when>
 				<otherwise>
@@ -82,7 +70,7 @@
 
 	<insert id="boardWrite">
 		insert into ${bsection} (nickname, userid, content,
-		regdate, imgname, section, countImg
+		regdate, imgname, section, countImg, profileImg
 		<if test="bsNum=='B3-01'">
 		, contentImg
 		</if>
@@ -92,7 +80,7 @@
 		) values
 		(#{nickname},#{userid},
 		#{board.content},sysdate(), #{board.imgname},
-		#{board.section},#{board.countImg}
+		#{board.section},#{board.countImg},#{profileImg}
 		<if test="bsNum=='B3-01'">
 		,#{board.contentImg}
 		</if>
@@ -199,7 +187,9 @@
 	</insert>
 	
 	<select id="RecentKeyword" resultType="String">
-		select keyword, count(*) from tbl_search where regdate >= (SELECT DATE_ADD(NOW(), INTERVAL -7 DAY)) group by keyword order by count(*) desc
+		select keyword, count(*) from tbl_search where 
+		regdate >= (SELECT DATE_ADD(NOW(), INTERVAL -7 DAY)) 
+		group by keyword order by count(*) desc
 	</select>
 	
 	<select id="orderRecipe" resultType="com.jjb.model.BoardVO">
@@ -223,11 +213,43 @@
 		select rownum,bno, nickname, section, imgname, userid, title, count 
 		from (select @rownum:=@rownum+1 as rownum, bno, nickname, section, imgname, userid, title, count		
 		from (select @rownum:=0) as rownum, (select a.bno, nickname, section, imgname, userid, title, if(count is null, 0, count) as count from (select bno, nickname, section, imgname, userid, title
-		from tbl_recipe) a left join (select a.bno,count(*) as count from tbl_like a right join tbl_recipe b on a.bno = b.bno where a.section ='B2-01' group by bno order by count(*) desc) b
+		from tbl_recipe
+		<if test="board.category!=null">
+			where category like concat('%',#{board.category},'%')
+		</if>
+		) a left join (select a.bno,count(*) as count from tbl_like a right join tbl_recipe b on a.bno = b.bno where a.section ='B2-01' 
+		group by bno order by count(*) desc) b
         on a.bno = b.bno order by count desc) tbl_recipe) tbl_recipe 
 		<![CDATA[
 		where rownum >(#{cri.pageNum}-1)*#{cri.amount} and rownum<=#{cri.pageNum}*#{cri.amount}
 		]]>
 	</select>
+	
+	<insert id="boardWriteBasic">
+		insert ${bsection} (title, content, nickname, section, userid, profileImg
+		<if test="bsection == 'tbl_board_Event'">
+			,imgname,duration
+		</if>
+		) values (#{board.title}, #{board.content}, #{nickname},#{board.section},#{userid},#{profileImg}
+		<if test="bsection == 'tbl_board_Event'">
+			,#{board.imgname},#{board.duration}
+		</if>
+		)
+	</insert>
+	
+	<update id="boardModifyBasic">
+		update ${bsection} set title=#{board.title}, content=#{board.content}, udate=now()
+		<if test="bsection == 'tbl_board_Event'">
+			,imgname=#{board.imgname}, duration = #{board.duration}
+		</if>
+		where bno=#{board.bno}
+		<if test="bsection == 'tbl_board_Event'">
+			and section=#{board.section}
+		</if>
+	</update>
+	
+	<update id="help_answer">
+		update tbl_help set answer =#{answer} where bno = #{bno}
+	</update>
 	
 </mapper>

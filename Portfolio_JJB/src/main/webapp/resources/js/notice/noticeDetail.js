@@ -135,9 +135,7 @@ function clickLike(bno){
 		alert("로그인을 해주세요.")
 		return false;
 	}
-	
 	var likeck = $(".forlike").attr("check");
-	
 	if(likeck == "unlike"){
 		$.ajax({
 			url : "board/unlike",
@@ -155,8 +153,7 @@ function clickLike(bno){
 				alert("code:" + request.status + "message:" + request.responseText
 						+ "error:" + error);
 			}
-		})
-		
+		})	
 	}else if(likeck = "like"){
 		$.ajax({
 			url : "board/like",
@@ -183,9 +180,7 @@ function clickfollow(userid){
 		alert("로그인을 해주세요.")
 		return false;
 	}
-	
-	var followck = $(".forfollow").attr("check");
-	
+	var followck = $(".forfollow").attr("check");	
 	if(followck == "unfollow"){
 		$.ajax({
 			url : "chef/unfollow",
@@ -202,8 +197,7 @@ function clickfollow(userid){
 				alert("code:" + request.status + "message:" + request.responseText
 						+ "error:" + error);
 			}
-		})
-		
+		})		
 	}else if(followck = "follow"){
 		$.ajax({
 			url : "chef/follow",
@@ -212,7 +206,7 @@ function clickfollow(userid){
 				"chef_followed" : userid
 			},
 			success : function() {
-				alert("좋아요를 하셨습니다.")
+				alert("팔로우를 하셨습니다.")
 				$(".forfollow").attr("check", "unfollow")
 				$(".forfollow").html("팔로우 취소")
 			},

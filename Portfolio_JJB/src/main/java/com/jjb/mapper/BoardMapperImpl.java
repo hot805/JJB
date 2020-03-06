@@ -167,4 +167,22 @@ public class BoardMapperImpl implements BoardMapper{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".likePaging",paramMap);
 	}
+
+	@Override
+	public void boardWriteBasic(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".boardWriteBasic",paramMap);
+	}
+
+	@Override
+	public void boardModifyBasic(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".boardModifyBasic",paramMap);
+	}
+
+	@Override
+	public void help_answer(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".help_answer",board);
+	}
 }

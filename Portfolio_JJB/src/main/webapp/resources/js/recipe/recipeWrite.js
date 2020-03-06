@@ -3,7 +3,6 @@
  */
 $(document).ready(function() {
 	$("input[name=file]").change(function() {
-		alert("aa")
 		var form= $("form[name=uploadForm]")[0];
 		var formData = new FormData(form);
 		
@@ -18,13 +17,10 @@ $(document).ready(function() {
 			contentType:false,
 			processData:false,
 			success:function(data){
-				alert(data)
 				
 				if($("#imgname").val() != ""){
-					alert("a")
 					$(".selectedThumb").children('img').attr("src","talk/displayFile?fileName="+data);
 				}else{
-					alert("b")
 					$(".selectedThumb").append("<img src='talk/displayFile?fileName="+data+"'>");
 				}			
 				$("#imgname").val("talk/displayFile?fileName="+data);
@@ -34,7 +30,7 @@ $(document).ready(function() {
 			}
 		
 		})		
-			});
+	});
 	
 	
-		})
+})

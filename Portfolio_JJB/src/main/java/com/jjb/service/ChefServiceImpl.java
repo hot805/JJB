@@ -36,7 +36,6 @@ public class ChefServiceImpl implements ChefService{
 	@Transactional
 	@Override
 	public void follow(Map<String, Object> follow) throws Exception {
-		// TODO Auto-generated method stub
 		cm.follow(follow);
 		cm.follownum(follow);
 	}
@@ -44,7 +43,6 @@ public class ChefServiceImpl implements ChefService{
 	@Transactional
 	@Override
 	public void unfollow(Map<String, Object> follow) throws Exception {
-		// TODO Auto-generated method stub
 		cm.unfollow(follow);
 		cm.follownum(follow);
 	}

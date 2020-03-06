@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><!-- jstl -->
+	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="stylesheet" href="resources/css/user/changeInfo.css">
 <script src="resources/js/user/changeInfo.js"></script>
 
-</head>
-<body>
+
 	<section class="container">
 		<hr>
 		<div class="form-group row">
@@ -19,6 +15,20 @@
 			</div>
 			<div class="col-sm-9">
 				<input class="form-control col-sm-3" type="text" name="userid" value="${user.userid}" readonly>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group row">
+			<div class="col-sm-3">
+				<Strong>프로필 이미지</Strong>
+			</div>
+			<div class="col-sm-9">
+				<form enctype="multipart/form-data" target="zeroFrame" name="uploadForm">
+					<input type="file" value="이미지 올리기" name="file">
+				</form>
+				<div>
+					<img class="rounded-circle info_profile" src="${sessionScope.profileImg }">
+				</div>				
 			</div>
 		</div>
 		<hr>
@@ -71,6 +81,3 @@
 		<div></div>
 		<div></div>
 	</section>
-
-</body>
-</html>

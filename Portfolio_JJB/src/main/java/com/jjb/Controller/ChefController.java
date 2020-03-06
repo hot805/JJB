@@ -27,7 +27,6 @@ public class ChefController {
 	
 	@RequestMapping(value="/chef", method=RequestMethod.GET)
 	public String chefListGET(Model model, HttpSession session,Criteria cri,BoardVO board) throws Exception {
-		System.out.println("chef 입성");
 		String userid = (String)session.getAttribute("userid");
 		int ordernum =0;
 		
@@ -40,15 +39,12 @@ public class ChefController {
 		paramMap.put("cri",cri);
 		
 		List orderdate = cservice.ChefListPaging(paramMap);
-		System.out.println(orderdate);
 		ordernum++;
 		paramMap.replace("ordernum", ordernum);		
 		List orderfollow = cservice.ChefListPaging(paramMap);
-		System.out.println(orderfollow);
 		ordernum++;
 		paramMap.replace("ordernum", ordernum);
 		List orderboard = cservice.ChefListPaging(paramMap);
-		System.out.println(orderboard);
 		
 		model.addAttribute("orderdate",orderdate);
 		model.addAttribute("orderfollow",orderfollow);
@@ -60,9 +56,7 @@ public class ChefController {
 	
 	@ResponseBody
 	@RequestMapping(value="/unfollow", method=RequestMethod.GET)
-	public void unfollowGET(String chef_followed, HttpSession session) throws Exception {
-		System.out.println("팔로우 취소 돌입 "+chef_followed);		
-		
+	public void unfollowGET(String chef_followed, HttpSession session) throws Exception {		
 		Map<String, Object> follow = new HashMap<>();
 		follow.put("chef_followed", chef_followed);
 		follow.put("userid", session.getAttribute("userid"));
@@ -73,8 +67,6 @@ public class ChefController {
 	@ResponseBody
 	@RequestMapping(value="/follow", method=RequestMethod.GET)
 	public void followGET(String chef_followed, HttpSession session) throws Exception {
-		System.out.println("팔로우 돌입 "+chef_followed);
-		
 		Map<String, Object> follow = new HashMap<>();
 		follow.put("chef_followed", chef_followed);
 		follow.put("userid", session.getAttribute("userid"));

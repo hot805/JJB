@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjb.mapper.UserMapper">
 	<select id="login" resultType="com.jjb.model.UserVO">
-		select userid, userpw, nickname, qualify 
+		select userid, userpw, nickname, qualify, profileImg 
 		from tbl_user 
 		where userid=#{userid} 
 		and userpw=#{userpw}
@@ -33,7 +33,11 @@
 	</select>
 	
 	<update id="changeInfo">
-		update tbl_user set nickname=#{nickname}, email=#{email}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3} where userid = #{userid};
+		update tbl_user set nickname=#{nickname}, email=#{email}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, profileImg=#{profileImg} where userid = #{userid};
+	</update>
+	
+	<update id="changeChefInfo">
+		update tbl_chef set profileImg = #{profileImg} where userid = #{userid};
 	</update>
 	
 	<update id="changePw">
@@ -42,6 +46,43 @@
 	
 	<delete id="deleteUser">
 		delete from tbl_user where userid=#{userid};
+	</delete>
+	
+	<select id="userList" resultType="com.jjb.model.UserVO">
+		
+		select *
+		from (select @rownum:=@rownum+1 as
+		rownum, userid, username, nickname, rdate, qualify, profileImg
+		from (select @rownum:=0) as rownum
+		, tbl_user
+		order by rdate desc) tbl_user 
+		<![CDATA[
+			where rownum >(#{pageNum}-1)*#{amount} and rownum<=#{pageNum}*#{amount}
+		]]>
+		;
+	</select>
+	
+	<select id="UserCount" resultType="int">
+		select count(*) from tbl_user 
+		<![CDATA[
+		where qualify < 2;
+		]]>
+	</select>
+	
+	<update id="grantUser">
+		update tbl_user set qualify=1 where userid =#{userid};
+	</update>
+	
+	<insert id="insertChef">
+		insert into tbl_chef (userid, nickname, regdate, profileImg) values (#{userid},#{nickname}, sysdate(),#{profileImg})
+	</insert>
+	
+	<update id="revokeUser">
+		update tbl_user set qualify=0 where userid =#{userid};
+	</update>
+	
+	<delete id="deleteChef">
+		delete from tbl_chef where userid=#{userid}
 	</delete>
 	
 </mapper>

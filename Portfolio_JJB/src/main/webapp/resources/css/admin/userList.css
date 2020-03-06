@@ -1,0 +1,55 @@
+@charset "UTF-8";
+#body{
+	background-color:white;
+	padding:2%;
+}
+
+.user_list > h5{
+	width:5%;
+	display:inline-block;
+}
+
+.user_list img{
+	width:50px;
+	height:50px;
+}
+
+.user_list > div{
+	width:17%;
+	display:inline-block;
+	font-size:13px;
+}
+
+.user_btnAll{
+	width:20%;
+}
+
+.user_grant{
+	font-size:12px;
+	border : solid 1px #1616ba;
+	background-color:#1616ba;
+	padding:4px;
+	color:white;
+	border-radius:5px;
+}
+
+.user_revoke{
+	font-size:12px;
+	border : solid 1px #1616ba;
+	background-color:#1616ba;
+	padding:4px;
+	color:white;
+	border-radius:5px;
+}
+
+.user_delete{
+	font-size:12px;
+	border : solid 1px #e45945;
+	background-color:#e45945;
+	padding:4px;
+	color:white;
+	border-radius:5px;
+}
+
+
+

@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><!-- jstl -->
 
-<link rel="stylesheet"
-	href="resources/css/board/notice/noticeDetail.css">
+<link rel="stylesheet" href="resources/css/board/notice/noticeDetail.css">
+<link rel="stylesheet" href="resources/css/board/talk/talkDetail.css">
 <script src="resources/js/notice/noticeDetail.js"></script>
 <script src="resources/js/talk/talkDetail.js"></script>
 <input type="hidden" value="${sessionScope.userid}" id="sessionid">
@@ -19,8 +19,13 @@
 )
 <div class="ND_style2 ND_udate">${board.udate }<c:if test="${sessionScope.userid eq board.userid}">&nbsp|&nbsp<a href="index?page=/talk/talkModify&bno=${board.bno}">수정</a>&nbsp|&nbsp<a style="cursor: pointer" onclick="boardDelete(${board.bno})">삭제</a></c:if></div>
 
-<br>
-<div class="ND_content"><textarea readonly>${board.content }</textarea><br>${board.contentImg }</div>
+<hr>
+<div class="ND_content">
+	<textarea readonly>${board.content }</textarea><br>
+	<div id="div_talkImage">
+		${board.contentImg }
+	</div>
+</div>
 <div class="ND_content_det"></div>
 <div class="ND_repSend">
 	<input type="text" class="ND_repContent " placeholder="댓글을 입력해주세요." name="repText">

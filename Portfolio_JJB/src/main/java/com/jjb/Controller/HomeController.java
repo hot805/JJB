@@ -52,18 +52,12 @@ public class HomeController {
 	
 	@RequestMapping(value= "/index", method = RequestMethod.GET)
 	public void index(Model model,Criteria cri,BoardVO board,String msg) throws Exception {
-		logger.info("기본은 하자!#@#@#@");
-		System.out.println("index cri "+cri);
-		System.out.println(board);
 		if(cri.getPage()==null) {
 			cri.setPage("/main");
-		}
-		
+		}	
 		if(msg != null) {
-			System.out.println("ss");
 			model.addAttribute("msg",msg);
 		}
-		System.out.println(bservice.RecentKeyword());
 		model.addAttribute("list",bservice.RecentKeyword());
 		model.addAttribute("cri",cri);
 		model.addAttribute("board",board);

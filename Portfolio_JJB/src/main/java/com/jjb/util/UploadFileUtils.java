@@ -14,8 +14,25 @@ import org.springframework.util.FileCopyUtils;
 
 
 public class UploadFileUtils {
-	
-
+	public static String profileFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString()+"_"+originalName;
+		String savedPath = File.separator+"profile";
+		//uploadPath+savedPath 라는 이름을 가진 폴더안에 savedName 파일을 생성
+		File target = new File(uploadPath+savedPath, savedName);
+		//파일 입출력을 담당 : fileData 파일을 만드는데 필요한 정보, target 이러한 형식으로 밖으로 보내겠다 
+		FileCopyUtils.copy(fileData,  target);
+		
+		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);//끝에서부터 .을 찾아서 그 위치를 반환(+1을 함으로서 뒤에 jpg라는 것만 남음) -> 파일의 종류를 알기 위함
+		
+		String uploadedFileName= null;
+		//System.out.println("썸네일 확인용"+MimeMediaUtil.getMediaType(formatName));
+		
+		uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
+		
+		
+		return uploadedFileName;
+	}
 	//uploadPath : servlet-context.xml에 설정한 업로드를 위한 경로
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
 		UUID uid = UUID.randomUUID();

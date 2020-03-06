@@ -3,3 +3,9 @@
 strong{
 	text-align:center;
 }
+
+.info_profile{
+	width:75px;
+	height:75px;
+	margin-top:2%;
+}

@@ -49,7 +49,9 @@
 									</c:if>
 								</div>
 							</ul>
-
+							<c:if test="${sessionScope.qualify gt 1}">
+								<input class="btn btn-primary" type="button" value="글쓰기" style="float:right;" onclick="notice_write('${board.section}')">
+							</c:if>
 						</td>
 					</tr>
 				</tbody>
@@ -57,7 +59,7 @@
 		</div>
 		<div style="float: right; width: 24%">
 			<ul class="list-group notice_right">
-				<li class="list-group-item"><a href="index?page=/board/notice">공지사항</a></li>
+				<li class="list-group-item"><a href="index?page=/board/&section=B4-01">공지사항</a></li>
 				<li class="list-group-item"><a class="dropdown-toggle" style="cursor:pointer" onclick="openLeft()">이벤트</a></li>
 				<li class="list-group-item left_menu"><a href="index?page=/board/&section=B4-02">진행중인 이벤트</a></li>
 				<li class="list-group-item left_menu"><a href="index?page=/board/&section=B4-03">종료된 이벤트</a></li>

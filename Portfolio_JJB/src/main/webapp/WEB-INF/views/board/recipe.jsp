@@ -13,7 +13,6 @@
 		<input class="btn btn-info" type="button" value="글쓰기" id="write"><br>
 	</div>
 </c:if>
-
 <div class="ListAtag">
 	<span>분류별</span>&nbsp&nbsp
 	<a class="iconTotal" href="index?page=/board/&section=B2-01">전체</a>&nbsp&nbsp
@@ -24,9 +23,9 @@
 <hr>
 
 <div class="recipe_order">
-	<a href="index?page=/board/&section=B2-01&orderno=1">최신순</a>&nbsp
-	<a href="index?page=/board/&section=B2-01&orderno=2">조회순</a>&nbsp
-	<a href="index?page=/board/&section=B2-01&orderno=3">좋아요순</a>
+	<a href="index?page=/board/&section=B2-01&orderno=1&category=${board.category }">최신순</a>&nbsp
+	<a href="index?page=/board/&section=B2-01&orderno=2&category=${board.category }">조회순</a>&nbsp
+	<a href="index?page=/board/&section=B2-01&orderno=3&category=${board.category }">좋아요순</a>
 </div>
 <br>
 <div class="recipe_content">

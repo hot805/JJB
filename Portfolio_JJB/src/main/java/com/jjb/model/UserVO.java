@@ -13,6 +13,7 @@ public class UserVO {
     private String updatedate;
     private int point;
     private int qualify;
+    private String profileImg;
     
 	public String getUserid() {
 		return userid;
@@ -87,10 +88,17 @@ public class UserVO {
 	public void setQualify(int qualify) {
 		this.qualify = qualify;
 	}
+	public String getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", nickname=" + nickname
 				+ ", email=" + email + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", rdate=" + rdate
-				+ ", updatedate=" + updatedate + ", point=" + point + ", qualify=" + qualify + "]";
+				+ ", updatedate=" + updatedate + ", point=" + point + ", qualify=" + qualify + ", profileImg="
+				+ profileImg + "]";
 	}
 }

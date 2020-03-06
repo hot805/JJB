@@ -1,9 +1,12 @@
 package com.jjb.Controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jjb.model.Criteria;
+import com.jjb.model.PageVO;
 import com.jjb.model.UserVO;
 import com.jjb.service.UserService;
 
@@ -20,6 +26,9 @@ import com.jjb.service.UserService;
 //@SessionAttributes({"userid","nickname"})//model에 넣을 때 세션에도 저장
 @RequestMapping("/user")
 public class UserController {
+	@Resource
+	private String uploadPath;
+	
 	@Autowired
 	private UserService uservice;
 	
@@ -30,22 +39,26 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginPOST(UserVO uservo, HttpSession session,RedirectAttributes redirect){
-		UserVO user;
+		UserVO user = null;
 		try {
 			user = uservice.login(uservo);
-			System.out.println(user);
-			//model.addAttribute("userid",user.getUserid());
-			//model.addAttribute("nickname",user.getNickname());
+			System.out.println("user : "+user);
 			session.setAttribute("userid", user.getUserid());
 			
 			//닉네임으로 db관리하면 안되는 이유 : 닉네임은 중복이 불가능하긴하나 수정이 가능하기때문에
 			session.setAttribute("nickname", user.getNickname());
-			session.setAttribute("qualify", user.getQualify() );
+			session.setAttribute("qualify", user.getQualify());
+			session.setAttribute("profileImg", user.getProfileImg());
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			redirect.addAttribute("msg","1");
+			redirect.addAttribute("msg","1-1");
+		}
+		
+		if(user == null) {
+			redirect.addAttribute("msg","1-1");
+		}else {
+			redirect.addAttribute("msg","1-2");
 		}
 		return "redirect:/index";
 
@@ -125,8 +138,16 @@ public class UserController {
 	@RequestMapping(value="/changeInfo",method=RequestMethod.POST)
 	public void changeInfoPOST(UserVO user, HttpSession session) throws Exception{
 		System.out.println("uservo는 "+user);
-		uservice.changeInfo(user);
-		session.setAttribute("nickname", user.getNickname());	
+		int qualify = (int)session.getAttribute("qualify");
+		
+		if(qualify == 1) {
+			uservice.changeChefInfo(user);
+		}else {
+			uservice.changeInfo(user);
+		}
+		
+		session.setAttribute("nickname", user.getNickname());
+		session.setAttribute("profileImg", user.getProfileImg());
 	}
 	
 	
@@ -150,18 +171,53 @@ public class UserController {
 	@RequestMapping(value="/deleteUser", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean deleteUserPost(String password,HttpSession session) throws Exception{
-		System.out.println("pass ="+password);
 		String userid = (String)session.getAttribute("userid");
 		String reck = uservice.checkPW(userid);
 		boolean result = false;
-		System.out.println(reck);
 		if(reck.equals(password)) {
 			uservice.deleteUser(userid);
 			result = true;
 		}else {		
-			System.out.println("false : "+reck);
 			result =  false;
 		}
 		return result;
+	}
+	
+	@RequestMapping(value="listUser", method=RequestMethod.GET)
+	public String listUserGET(Model model,Criteria cri) throws Exception {
+		int total =uservice.userCount();
+		PageVO pv = new PageVO(cri, total); 
+		model.addAttribute("list",uservice.userList(cri));
+		model.addAttribute("Page",pv);
+		return "admin/userList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="grantUser", method=RequestMethod.POST)
+	public void grantUserPOST(Model model, UserVO user) throws Exception {
+		uservice.grantUser(user);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="revokeUser", method=RequestMethod.POST)
+	public void revokeUserPOST(Model model, UserVO user) throws Exception {
+		uservice.revokeUser(user);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="deleteUser_admin", method=RequestMethod.POST)
+	public void deleteUser_adminPOST(Model model, String userid) throws Exception {
+		uservice.deleteUser(userid);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/GetImgName", method = RequestMethod.POST, produces = "text/palin;charset=utf-8")
+	public ResponseEntity<String> talkPost(MultipartFile file, Model model) throws Exception {
+		System.out.println("origianlName: " + file.getOriginalFilename());
+		System.out.println("size: " + file.getSize());
+		System.out.println("contentType: " + file.getContentType());
+
+		return new ResponseEntity<>(com.jjb.util.UploadFileUtils.profileFile(uploadPath,file.getOriginalFilename(),file.getBytes()),HttpStatus.CREATED);
+
 	}
 }

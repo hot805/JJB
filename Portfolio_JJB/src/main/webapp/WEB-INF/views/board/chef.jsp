@@ -17,7 +17,7 @@
 	<div class="tab-pane fade <c:if test="${activeItem eq 'a1' || empty activeItem }">show active</c:if> " id="a1">
 		<c:forEach items="${orderdate }" var="chef" varStatus="status">
 			<div class="chef_board">
-				<h2>${status.count }</h2><img src="${chef.profileImg }" />
+				<h2>${status.count }</h2><img class="rounded-circle" src="${chef.profileImg }" />
 				<div class="chef_all">
 					<div class="chef_nickname">${chef.nickname }</div>&nbsp(<div class="chef_userid">${chef.userid }</div>)<br>
 					팔로우 : <div class="chef_followno">${chef.followno }</div>&nbsp 게시글 : <div class="chef_tableno">${chef.tableno }</div>&nbsp 쉐프날짜 : <div class="chef_regdate">${chef.regdate }</div>
@@ -44,7 +44,7 @@
 	<div class="tab-pane fade <c:if test="${activeItem eq 'a2' }">show active</c:if>" id="a2">
 		<c:forEach items="${orderfollow }" var="chef" varStatus="status">
 			<div class="chef_board">
-				<h2>${status.count }</h2><img src="${chef.profileImg }" />
+				<h2>${status.count }</h2><img class="rounded-circle" src="${chef.profileImg }" />
 				<div class="chef_all">
 					<div class="chef_nickname">${chef.nickname }</div>&nbsp(<div class="chef_userid">${chef.userid }</div>)<br>
 					팔로우 : <div class="chef_followno">${chef.followno }</div>&nbsp 게시글 : <div class="chef_tableno">${chef.tableno }</div>&nbsp 쉐프날짜 : <div class="chef_regdate">${chef.regdate }</div>
@@ -73,7 +73,7 @@
 	<div class="tab-pane fade <c:if test="${activeItem eq 'a3' }">show active</c:if>" id="a3">
 		<c:forEach items="${orderboard }" var="chef" varStatus="status">
 			<div class="chef_board">
-				<h2>${status.count }</h2><img src="${chef.profileImg }" />
+				<h2>${status.count }</h2><img class="rounded-circle" src="${chef.profileImg }" />
 				<div class="chef_all">
 					<div class="chef_nickname">${chef.nickname }</div>&nbsp(<div class="chef_userid">${chef.userid }</div>)<br>
 					팔로우 : <div class="chef_followno">${chef.followno }</div>&nbsp 게시글 : <div class="chef_tableno">${chef.tableno }</div>&nbsp 쉐프날짜 : <div class="chef_regdate">${chef.regdate }</div>

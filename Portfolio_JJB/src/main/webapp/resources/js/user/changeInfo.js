@@ -99,6 +99,40 @@ $(document).ready(function(){
 		}
 	})
 	//이메일 인증 끝
+	
+	//프로필 이미지
+$("input[name=file]").change(function() {
+	var form= $("form[name=uploadForm]")[0];
+	var formData = new FormData(form);
+	var originalImg = $(".info_profile").attr("src");
+	
+	console.log(form)
+	console.log(formData)
+	
+	$.ajax({
+		url : 'user/GetImgName',
+		type:'post',
+		data: formData,
+		contentType:false,
+		processData:false,
+		success:function(data){	
+			$(".info_profile").attr("src","talk/displayFile?fileName="+data);
+			var result = confirm("해당 이미지로 프로필이미지를 변경하시겠습니까?");
+			if(result){
+				changeAjax();	
+			}else{
+				alert("수정을 취소하셨습니다.")									
+				$(".info_profile").attr("src",originalImg);
+			}
+		},
+		error:function(error){
+			alert(error)
+		}
+	
+	})		
+});
+//프로필 이미지 끝
+	
 })
 
 //공통 Ajax 처리
@@ -109,6 +143,7 @@ function changeAjax(){
 	var addr1 = $("input[name=addr1").val();
 	var addr2 = $("input[name=addr2").val();
 	var addr3 = $("input[name=addr3").val();
+	var profileImg = $(".info_profile").attr("src");
 	
 	$.ajax({
 		url : "user/changeInfo",
@@ -119,10 +154,11 @@ function changeAjax(){
 			  "email":email,
 			  "addr1":addr1,
 			  "addr2":addr2,
-			  "addr3":addr3},
+			  "addr3":addr3,
+			  "profileImg":profileImg},
 		success : function() {
 					alert('수정이 완료되었습니다')
-					location.href="index?page=/user/manage";
+					location.reload();
 		},
 		error : function(request,error){
 			alert("code:"+request.status+"message:"+request.responseText+"error:"+error);
@@ -237,3 +273,4 @@ function changeBtn(){
 	changeAjax();
 }
 //우편번호 수정 끝
+

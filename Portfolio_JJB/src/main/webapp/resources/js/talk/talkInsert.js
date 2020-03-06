@@ -16,21 +16,20 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url : '../menu/talk',
+			url : '../talk/GetImgName',
 			type:'post',
 			data: formData,
 			contentType:false,
 			processData:false,
 			success:function(data){
 				var imgnum = $(opener.document).find('#countImg').val()*1;
-				alert(imgnum)
 				if(imgnum >1){
 					$(opener.document).find('#brback'+(imgnum-1)).remove();
 				}
-				var str = "<br id='brfront"+imgnum+"'><div class='deleteDiv"+imgnum+"' contentEditable='false' onclick='checkImg()'><img class='imgSample' id='getImage"+imgnum+"' style='width:200px;height:200px; vertical-align: bottom'></img><input type='button' value='삭제' onclick='deleteImg("+'"'+data+'"'+','+imgnum+")'></div><br id='brback"+imgnum+"'>";
-				//var str = "<br><div class='deleteDiv"+imgnum+"'><img class='imgSample' id='getImage"+imgnum+"' style='width:200px;height:200px;'></img><a onclick='deleteImg("+'"'+data+'"'+','+imgnum+")' style='cursor:pointer'>x</a></div><br>";
-
-				//insertHtmlAtCursor(str);
+				var str = "<br id='brfront"+imgnum+"'><div class='deleteDiv"+imgnum+"' " +
+						"contentEditable='false' onclick='checkImg()'><img class='imgSample' id='getImage"+imgnum+"'>" +
+						"</img><input type='button' value='삭제' onclick='deleteImg("+'"'+data+'"'+','+imgnum+")'>" +
+						"</div><br id='brback"+imgnum+"'>";
 				$(opener.document).find('.temporaryTag').before(str);
 				$(opener.document).find('#getImage'+imgnum).attr("src","talk/displayFile?fileName="+data);
 				if(imgnum==1){

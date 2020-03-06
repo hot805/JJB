@@ -3,7 +3,6 @@
  */
 
 	function deleteImg(data, imgnum) {
-		alert(data)
 		alert("이미지" + imgnum)
 		$.ajax({
 			url : "talk/deleteFile",
@@ -19,7 +18,6 @@
 					$("#brfront" + imgnum).remove();
 					$("#brback" + imgnum).remove();
 					//$(".deleteDiv"+(imgnum-1)).focus();
-					alert(document.activeElement.name);
 
 				}
 			}
@@ -69,7 +67,6 @@
 					var imgname = imgname1;
 				}
 			}
-			alert("aaa"+imgname)
 
 			$.ajax({
 				url : url,
@@ -99,10 +96,8 @@
 	function insertHtmlAtCursor() {
 		 var sel = window.getSelection && window.getSelection();
 		    if (sel && sel.rangeCount < 1) {
-		    	//$(".temporaryTag").focus();
 		    	return false;
-		    }
-		
+		    }		
 		$(".temporaryTag").remove();
 		var html = "<div class='temporaryTag'></div>";
 		var range, node;

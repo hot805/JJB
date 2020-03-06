@@ -9,3 +9,7 @@ function openLeft(){
 		$(".left_menu").attr("style","display:none")
 	}
 }
+
+function notice_write(section){
+		location.href="index?page=/board/write&section="+section;	
+}

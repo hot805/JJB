@@ -19,7 +19,8 @@ public class BoardVO {
 	private int countImg;
 	private String category;
 	private String answer;
-	private int orderno; 
+	private int orderno;
+	private String duration;
 
 	public int getBno() {
 		return bno;
@@ -157,13 +158,21 @@ public class BoardVO {
 		this.orderno = orderno;
 	}
 
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", profileImg=" + profileImg + ", title=" + title + ", content=" + content
 				+ ", userid=" + userid + ", nickname=" + nickname + ", regdate=" + regdate + ", udate=" + udate
 				+ ", cnt=" + cnt + ", filename=" + filename + ", imgname=" + imgname + ", section=" + section
 				+ ", contentImg=" + contentImg + ", countImg=" + countImg + ", category=" + category + ", answer="
-				+ answer + ", orderno=" + orderno + "]";
+				+ answer + ", orderno=" + orderno + ", duration=" + duration + "]";
 	}
 
 }

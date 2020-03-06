@@ -158,5 +158,23 @@ public class BoardServiceImpl implements BoardService{
 		return bm.likePaging(paramMap);
 	}
 
+	@Override
+	public void boardWriteBasic(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		bm.boardWriteBasic(paramMap);
+	}
+
+	@Override
+	public void boardModifyBasic(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		bm.boardModifyBasic(paramMap);;
+	}
+
+	@Override
+	public void help_answer(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		bm.help_answer(board);
+	}
+
 
 }

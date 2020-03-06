@@ -95,6 +95,7 @@ public class TalkController {
 		paramMap.put("content", content);
 		paramMap.put("nickname", nickname);
 		
+		
 		return content;
 	}
 	

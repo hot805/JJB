@@ -8,7 +8,7 @@
 <script src="resources/js/user/deleteUser.js"></script>
 </head>
 <body>
-	<section class="container">
+	<section class="container" style="margin-left:30%;">
 			<div class="form-group">
 				<h5>현재 비밀번호</h5>
 				<input class="form-control col-sm-3" type="password" name="password">

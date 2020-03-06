@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#div_talkImage{
+	padding-left : 20%;
+}
+
+.imgSample{
+	width:60%;
+	height:350px
+}
+
+.ND_content textarea{
+	width:100%;
+	padding:2%;
+}

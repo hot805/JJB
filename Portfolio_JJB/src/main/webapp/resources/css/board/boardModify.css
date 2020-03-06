@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#body{
+	background-color:white;
+	padding:1%;
+}
+
+.boardModify_table{
+	width:100%;
+	padding:2%;
+}
+
+.boardModify_table th{
+	text-align:center;
+	padding:1% 2%;
+	width: 20%;
+	color:white;
+	background-color:#303030;
+}
+
+.boardModify_table td{
+	padding:1% 2%;
+}
+
+#boardModify_title{
+	width:100%;
+	border-style:none;
+}
+
+#boardModify_duration{
+	width:100%;
+	border-style:none;
+}
+
+#board_btn{
+	text-align:center;
+}
+
+textarea{
+	border-style:none;
+}

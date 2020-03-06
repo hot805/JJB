@@ -27,5 +27,29 @@
 }
 
 .help_answer{
-	display:inline;
+	width:100%;
+	padding:1%;
+	border:none;
+}
+
+.help_answerRow input{
+	font-size:12px;
+	border : solid 1px #1616ba;
+	background-color:#1616ba;
+	padding:4px;
+	color:white;
+	border-radius:5px;
+} 
+.help_write{
+	margin-bottom:2%;	
+}
+
+.help_write > a{
+	float:right;
+	font-size:15px;
+	border : solid 1px #23a937;
+	background-color:#23a937;
+	padding:4px;
+	color:white;
+	border-radius:5px;
 }

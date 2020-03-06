@@ -10,6 +10,9 @@
 		location.href="index"
 	</script>
 </c:if>
+<div class="help_write">
+	<a href="index?page=/board/write&section=B6-01">문의하기</a><br>
+</div>
 
 <div class="row">
 		<div class="left col-sm-12">
@@ -17,10 +20,11 @@
 				<thead>
 					<tr>
 						<th width="25.5%">제목</th>
-						<th width="40.5%">내용</th>
+						<th width="32.5%">내용</th>
 						<th width="9.5%">닉네임</th>
 						<th width="15%">작성(수정)일자</th>
 						<th width="9.5%">답변</th>
+						<th width="8%"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,25 +34,38 @@
 							<td>${board.content }</td>
 							<td>${board.nickname}</td>
 							<td>${board.regdate}</td>
-							<td><a class="ckAnswer" style="cursor:pointer" onclick="displayAnswer(${board.bno})">
+							<td>
+								<a class="ckAnswer" style="cursor:pointer" onclick="displayAnswer(${board.bno})">
+									<c:choose>
+										<c:when test="${empty board.answer}">
+											답변 없음
+										</c:when>
+										<c:otherwise>
+											답변 보기
+										</c:otherwise>
+									</c:choose>
+								</a>
+							</td>
+							<td>
 								<c:choose>
-									<c:when test=" ${empty board.answer}">
-										답변 없음
+									<c:when test="${sessionScope.qualify ge 2}">
+										<a style="cursor: pointer" onclick="help_ShowAnswer(${board.bno })">답변</a>
 									</c:when>
 									<c:otherwise>
-										답변 보기
+										<a href="index?page=/board/modifyBasic&bno=${board.bno}&content=${board.content }&section=${board.section }&title=${board.title }">수정</a>
 									</c:otherwise>
 								</c:choose>
-							</a></td>
+								&nbsp<a style="cursor: pointer" onclick="boardDelete(${board.bno},'${board.section }')">삭제</a>
+							</td>
 						</tr>
 						<tr class="help_answerRow help_bno${board.bno }">
-							<td colspan="5">
-								<h6>└ 답변 : </h6><div class="help_answer">${board.answer }</div>
+							<td colspan="6">
+								<textarea class="help_answer" readonly>${board.answer }</textarea>
 							</td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="5" style="text-align: center">
+						<td colspan="6" style="text-align: center">
 
 							
 								<center>

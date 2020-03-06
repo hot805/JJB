@@ -9,20 +9,24 @@
 <input type="hidden" value="${board.bno }" id="boardnum">
 <input type="hidden" value="${board.section }" id="section">
 
-
 <c:choose>
 	<c:when test="${board.section == 'B2-01'}">
+		<link rel="stylesheet" href="resources/css/board/recipe/recipeDetail.css">
 		<c:set var="location" value="/recipe/recipeModify" />
 	</c:when>
-	<c:when test="${board.section == 'B4-01' || board.section == 'B4-02' || board.section == 'B4-03' || board.section == 'B4-04'}">
-		
+	<c:when test="${board.section == 'B4-01'}">
+		<c:set var="location" value="/board/modifyBasic&bno=${board.bno}&content=${board.content }&section=${board.section }&title=${board.title }" />
 	</c:when>
+	<c:when test="${board.section == 'B4-02' || board.section == 'B4-03' || board.section == 'B4-04'}">
+		<c:set var="location" value="/board/modifyBasic&bno=${board.bno}&content=${board.content }&section=${board.section }&title=${board.title }&imgname=${board.imgname }&duration=${board.duration }" />
+	</c:when>
+	
 </c:choose>
 
 <div class="ND_style1 ND_title">${board.title }</div>
 <div class="ND_style2 ND_udate">${board.udate }<c:if test="${sessionScope.userid eq board.userid}">&nbsp|&nbsp<a href="index?page=<c:out value="${location}" />&bno=${board.bno}" style="color:#c9c9c9">수정</a>&nbsp|&nbsp<a style="cursor: pointer" onclick="boardDelete(${board.bno},'${board.section }')">삭제</a></c:if></div>
 <hr>
-<div class="ND_style1 ND_inline">${board.nickname }</div>
+<img class="rounded-circle detail_profile" src="${board.profileImg }"><div class="ND_style1 ND_inline">${board.nickname }</div>
 (
 <div class="ND_style2 ND_inline" id="forModifyID">${board.userid }</div>
 )

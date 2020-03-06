@@ -15,17 +15,96 @@
 <script src="resources/plugin/bootstrap.min.js"></script>
 </head>
 <body>
-
-	<c:if test="${msg eq '1'}">
-		<script type="text/javascript">
-			alert("로그인에 실패하였습니다. 다시한번 시도해주세요.")
-			location.href = "index?page=/user/login";
-		</script>
-	</c:if>
+	<c:choose>
+		<c:when test="${msg eq '1-1' }">
+			<script type="text/javascript">
+				alert("로그인에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/user/login";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '1-2' }">
+			<script type="text/javascript">
+				alert("로그인에 성공하셨습니다.")
+				location.href = "index?page=/main";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-1' }">
+			<script type="text/javascript">
+				alert("글작성에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B4-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-2' }">
+			<script type="text/javascript">
+				alert("글작성에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B4-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-3' }">
+			<script type="text/javascript">
+				alert("글수정에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B4-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-4' }">
+			<script type="text/javascript">
+				alert("글수정에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B4-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-21' }">
+			<script type="text/javascript">
+				alert("글작성에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B4-02";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-22' }">
+			<script type="text/javascript">
+				alert("글작성에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B4-02";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-23' }">
+			<script type="text/javascript">
+				alert("글수정에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B4-02";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '4-24' }">
+			<script type="text/javascript">
+				alert("글수정에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B4-02";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '6-1' }">
+			<script type="text/javascript">
+				alert("글작성에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B6-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '6-2' }">
+			<script type="text/javascript">
+				alert("글작성에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B6-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '6-3' }">
+			<script type="text/javascript">
+				alert("글수정에 실패하였습니다. 다시한번 시도해주세요.")
+				location.href = "index?page=/board/&section=B6-01";
+			</script>
+		</c:when>
+		<c:when test="${msg eq '6-4' }">
+			<script type="text/javascript">
+				alert("글수정에 성공하였습니다.")
+				location.href = "index?page=/board/&section=B6-01";
+			</script>
+		</c:when>
+	</c:choose>
 	<!-- 헤더 -->
 	<div id="header">
 		<div class="myHeader">
-			<nav class="navbar navbar-expand-sm" style="float: right;">
+			<nav class="navbar navbar-expand-sm" style="float: right; padding-bottom:0">
 				<ul class="navbar-nav mainNav">
 					<c:choose>
 						<c:when test="${sessionScope.userid == null }">
@@ -35,7 +114,11 @@
 								href="index?page=/user/signUp">회원가입</a></li>
 						</c:when>
 						<c:when test="${sessionScope.userid != null }">
-							<span>${sessionScope.nickname}님 환영합니다.</span>
+							<span style="line-height:2.3">${sessionScope.nickname}님 환영합니다.</span>
+							<c:if test="${sessionScope.qualify ge 2}">
+								<li class="nav-item">
+								<a class="nav-link" href="index?page=/user/listUser">유저 관리</a></li>
+							</c:if>
 							<li class="nav-item"><a class="nav-link" href="user/logOut">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="index?page=/user/manage">정보</a></li>
@@ -44,7 +127,7 @@
 				</ul>
 			</nav>
 			<div id="myHeader_Mid">
-				<a href="index"><img src="resources/image/logo.png"
+				<a href="index"><img src="resources/image/pagelogo.png"
 					class="imgLogo"></a>
 				<form class="group_Header_search" method="get">
 					<input type="hidden" name="page" value="/board/"> <input

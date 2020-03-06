@@ -1,12 +1,14 @@
 package com.jjb.mapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jjb.model.Criteria;
 import com.jjb.model.UserVO;
 
 @Repository
@@ -55,6 +57,11 @@ public class UserMapperImpl implements UserMapper{
 	public void changeInfo(UserVO user) throws Exception {
 		sqlSession.update(namespace+".changeInfo",user);
 	}
+	
+	@Override
+	public void changeChefInfo(UserVO user) throws Exception {
+		sqlSession.update(namespace+".changeChefInfo",user);
+	}
 
 	@Override
 	public void changePw(String newPw, String userid) throws Exception {
@@ -67,9 +74,37 @@ public class UserMapperImpl implements UserMapper{
 
 	@Override
 	public void deleteUser(String userid) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".deleteUser",userid);
 	}
+	
+	@Override
+	public List<UserVO> userList(Criteria cri) throws Exception {
+		List list = sqlSession.selectList(namespace+".userList",cri);
+		return list;
+	}
 
+	@Override
+	public void grantUser(UserVO user) throws Exception {
+		sqlSession.update(namespace+".grantUser",user);
+	}
+	
+	@Override
+	public void insertChef(UserVO user) throws Exception {
+		sqlSession.insert(namespace+".insertChef",user);
+	}
+	
+	@Override
+	public void revokeUser(UserVO user) throws Exception {
+		sqlSession.update(namespace+".revokeUser",user);
+	}
 
+	@Override
+	public void deleteChef(UserVO user) throws Exception {
+		sqlSession.delete(namespace+".deleteChef",user);
+	}
+
+	@Override
+	public int userCount() throws Exception {
+		return sqlSession.selectOne(namespace+".UserCount");
+	}
 }

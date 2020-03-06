@@ -17,6 +17,10 @@ $(document).ready(function() {
 		var newPw = $("input[name=newPw]").val();
 		var reckNewPw = $("input[name=reckNewPw]").val();
 		
+		if($("input[name=password]").val()==""){
+			alert("비밀번호를 입력해주세요.")
+			return false;
+		}
 		
 		if($("#answer_pw").html() != "사용가능한 비밀번호입니다."){
 			alert("비밀번호 패턴을 다시 확인해주세요.")

@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-		<form action="user/login" method="post">
+		<form action="user/login" method="post" onsubmit="return loginCheck()">
 			<div id="myLogin1">
 				<h4>로그인</h4>
 				<input type="text" placeholder="아이디" name="userid"><br>

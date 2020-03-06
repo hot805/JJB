@@ -71,4 +71,13 @@ public interface BoardMapper {
 	
 	// 레시피 좋아요순 paging
 	public List<BoardVO> likePaging(Map<String, Object> paramMap) throws Exception;
+	
+	// 게시판 글작성_기본
+	public void boardWriteBasic(Map<String, Object> paramMap) throws Exception;
+	
+	//게시판 변경_기본
+	public void boardModifyBasic(Map<String, Object> paramMap) throws Exception;
+	
+	// 고객센터 답변 수정 및 작성
+	public void help_answer(BoardVO board) throws Exception;
 }

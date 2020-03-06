@@ -20,5 +20,4 @@ public interface ChefService {
 
 	// 팔로우 취소
 	public void unfollow(Map<String, Object> follow) throws Exception;
-	
 }
