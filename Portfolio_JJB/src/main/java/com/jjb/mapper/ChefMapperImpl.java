@@ -17,41 +17,43 @@ public class ChefMapperImpl implements ChefMapper{
 	private SqlSession sqlSession;	
 	private static final String namespace="com.jjb.mapper.ChefMapper";
 	
+	//½¦ÇÁ ¸®½ºÆ®
 	@Override
 	public List<ChefVO> ChefList(Map<String, Object> paramMap) throws Exception {
 		List list = sqlSession.selectList(namespace+".cheflist",paramMap);
 		return list;
 	}
 
+	//½¦ÇÁ ÆäÀÌÂ¡
 	@Override
 	public List<ChefVO> ChefListPaging(Map<String, Object> paramMap) throws Exception {
 		List<ChefVO> list = sqlSession.selectList(namespace+".chefListPaging", paramMap);
 		return list;
 	}
-
+	
+	//½¦ÇÁ Ä«¿îÅÍ
 	@Override
 	public int ChefCount() throws Exception {
 		int total = sqlSession.selectOne(namespace+".chefCount");
 		return total;
 	}
-
+	
+	//ÆÈ·Î¿ì
 	@Override
 	public void follow(Map<String, Object> follow) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.insert(namespace+".follow", follow);
 	}
-
+	
+	//ÆÈ·Î¿ì Ãë¼Ò
 	@Override
 	public void unfollow(Map<String, Object> follow) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".unfollow", follow);
 		
 	}
-
+	
+	//ÆÈ·Î¿ì ¼ö °è»ê
 	@Override
 	public void follownum(Map<String, Object> follow) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("ÆÈ·Î¿ì È®ÀÎ");
 		System.out.println(follow);
 		sqlSession.update(namespace+".follownum", follow);
 	}

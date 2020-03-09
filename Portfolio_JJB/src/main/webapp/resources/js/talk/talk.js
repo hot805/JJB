@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+//토크 글쓰기 페이지로 이동
 	$(document).ready(function() {
 		$("input[value=글쓰기]").click(function() {
 			if($("#sessionID").val() == ""){

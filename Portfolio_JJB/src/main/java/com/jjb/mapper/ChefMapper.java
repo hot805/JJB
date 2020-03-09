@@ -6,10 +6,13 @@ import java.util.Map;
 import com.jjb.model.ChefVO;
 
 public interface ChefMapper {
+	//½¦ÇÁ ¸®½ºÆ®
 	public List<ChefVO> ChefList(Map<String, Object> paramMap) throws Exception;
 	
+	//½¦ÇÁ ÆäÀÌÂ¡
 	public List<ChefVO> ChefListPaging(Map<String, Object> paramMap) throws Exception;
 	
+	//½¦ÇÁ Ä«¿îÆ®
 	public int ChefCount() throws Exception;
 
 	// ÆÈ·Î¿ì

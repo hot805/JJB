@@ -2,6 +2,7 @@
  * 
  */
 $(document).ready(function(){
+	//비밀번호 확인시 계정 삭제
 	$("#btn_delete").click(function(){
 		var password = $("input[name=password").val();
 		var rechPw = $("input[name=reckPw]").val();

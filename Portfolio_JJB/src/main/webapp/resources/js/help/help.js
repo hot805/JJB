@@ -1,8 +1,10 @@
 /**
  * 
  */
+//스위치를 위한 변수
 var swnum=1;
 
+//답변 보이게해주는 함수
 function displayAnswer(bno){
 	if($(".help_bno"+bno).css("display") == "none"){
 		$(".help_bno"+bno).show();
@@ -11,6 +13,7 @@ function displayAnswer(bno){
 	}
 }
 
+//게시판 삭제
 function boardDelete(bno,section){
 	
 	$.ajax({
@@ -31,6 +34,7 @@ function boardDelete(bno,section){
 			})
 }
 
+//관리자일때 답변버튼 보이게 하는 함수
 function help_ShowAnswer(bno){
 	swnum=swnum*-1;
 	$(".help_bno"+bno).show();
@@ -44,6 +48,7 @@ function help_ShowAnswer(bno){
 	}
 }
 
+//관리자 답변
 function help_answer(bno){
 	var answer = $(".help_bno"+bno+" textarea").val();
 	$.ajax({

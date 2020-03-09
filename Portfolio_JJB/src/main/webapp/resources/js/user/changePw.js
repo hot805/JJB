@@ -2,8 +2,10 @@
  * 
  */
 $(document).ready(function() {
+	//패턴 변수
 	var pwcheck=RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,16}$/);
 	
+	//패스워드 패턴형식 확인
 	$("input[name=newPw]").keyup(function(){
 		if(!(pwcheck.test($("input[name=newPw]").val()))){
 			$("#answer_pw").html("형식에 맞게 입력해주세요.")
@@ -12,7 +14,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	//비밀번호 확인 Ajax포함
 	$("#btn_pw").click(function() {
 		var newPw = $("input[name=newPw]").val();
 		var reckNewPw = $("input[name=reckNewPw]").val();

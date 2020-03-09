@@ -38,18 +38,21 @@ public class TalkController {
 	
 	@Autowired BoardService bservice;
 	
+	//토크 리스트 페이지 이동
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String talkListGET() throws Exception{
 		
 		return "/board/talk";
 	}
 	
+	//이미지 삽입을 위한 페이지 이동
 	@RequestMapping(value="/insertImg", method = RequestMethod.GET)
 	public String insertImgGET() throws Exception{
 		System.out.println("insertImg 돌입");
 		return "/board/talkInsertImg";
 	}
 	
+	//토크 작성 페이지로 이동
 	@RequestMapping(value="/talkWrite", method = RequestMethod.GET)
 	public String talkWriteGET(Model model) throws Exception{
 		System.out.println("talkWrite 돌입");
@@ -58,6 +61,7 @@ public class TalkController {
 		return "/board/talkWrite";
 	}
 	
+	//토크 수정 페이지로 이동
 	@RequestMapping(value="/talkModify", method = RequestMethod.GET)
 	public String talkModifyGET(Model model,BoardVO board) throws Exception{
 		System.out.println("talkModify 돌입");
@@ -72,9 +76,9 @@ public class TalkController {
 		return "/board/talkModify";
 	}
 	
+	//토크 삭제 페이지로 이동
 	@ResponseBody
 	@RequestMapping(value="/talkDelete",method = RequestMethod.GET)
-	//public String talkDeleteGET(BoardVO board,Model model,RedirectAttributes redirect){
 	public void talkDeleteGET(BoardVO board) throws Exception{
 		System.out.println("토크 삭제");
 		Map<String, Object> paramMap = new HashMap<>();
@@ -84,6 +88,7 @@ public class TalkController {
 	
 	}
 	
+	//토크 작성
 	@ResponseBody
 	@RequestMapping(value="/talkWrite", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	public String talkWritePOST(HttpSession session,String content) throws Exception{
@@ -99,6 +104,7 @@ public class TalkController {
 		return content;
 	}
 	
+	//이미지 경로+이름 얻는 메소드
 	@ResponseBody
 	@RequestMapping(value = "/GetImgName", method = RequestMethod.POST, produces = "text/palin;charset=utf-8")
 	public ResponseEntity<String> talkPost(MultipartFile file, Model model) throws Exception {
@@ -110,6 +116,7 @@ public class TalkController {
 
 	}
 	
+	//외부 이미지 경로를 가져오기 위한 메소드
 	@ResponseBody
 	@RequestMapping(value="/displayFile", method=RequestMethod.GET)
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
@@ -147,6 +154,7 @@ public class TalkController {
 		return entity;
 	}
 	
+	//외부 경로 폴더에서 해당 이미지 삭제
 	@ResponseBody
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName){

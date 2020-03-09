@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+	//이미지 삭제
 	function deleteImg(data, imgnum) {
 		alert("이미지" + imgnum)
 		$.ajax({
@@ -26,7 +26,7 @@
 	}
 
 	$(document).ready(function() {
-
+		//글작성 완료(이미지를 위한 임시 태그 삭제)
 		$("#btn_click").click(function() {
 			
 			if($("#countImg").val() > 1){	
@@ -92,7 +92,7 @@
 		})
 
 	})
-
+	//커서 위치 정보 가져오기
 	function insertHtmlAtCursor() {
 		 var sel = window.getSelection && window.getSelection();
 		    if (sel && sel.rangeCount < 1) {

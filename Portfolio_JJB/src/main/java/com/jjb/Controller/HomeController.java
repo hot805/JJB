@@ -33,9 +33,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	//기본
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -50,6 +48,7 @@ public class HomeController {
 		return "home";
 	}
 	
+	//처음 목록
 	@RequestMapping(value= "/index", method = RequestMethod.GET)
 	public void index(Model model,Criteria cri,BoardVO board,String msg) throws Exception {
 		if(cri.getPage()==null) {
@@ -64,6 +63,7 @@ public class HomeController {
 		
 	}
 	
+	//메인페이지
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String main(Model model) throws Exception{
 		System.out.println("main 들어옴");

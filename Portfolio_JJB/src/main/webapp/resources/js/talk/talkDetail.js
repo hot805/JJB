@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+//글삭제
 function boardDelete(bno){
 	
 	$.ajax({

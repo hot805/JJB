@@ -1,10 +1,12 @@
 /**
  * 
  */
+//페이지가 열릴때 삭제 버튼 제거
 window.onload = function(){
 	$("input[value=삭제]").attr("style","display:none");
 }
 
+//댓글 작성
 function repWrite() {
 	var repText = $("input[name=repText]").val();
 	var userid = $("#sessionid").val();
@@ -44,6 +46,7 @@ function repWrite() {
 
 }
 
+//댓글 수정창 생성
 function repModi(no, userid) {
 	var replyid = $("#sessionid").val();
 	alert(no + " " + userid)
@@ -54,6 +57,7 @@ function repModi(no, userid) {
 					+ no + ")'>");
 }
 
+//댓글 수정
 function repUpdate(rno) {
 	var section = $("#section").val();
 	var repText = $("#forUpdate" + rno).val()
@@ -82,6 +86,7 @@ function repUpdate(rno) {
 	})
 }
 
+//글삭제
 function boardDelete(bno,section){
 	
 	$.ajax({
@@ -102,7 +107,7 @@ function boardDelete(bno,section){
 			})
 }
 
-
+//댓글 삭제
 function repDel(rno) {
 	var section = $("#section").val();
 	var result = confirm("댓글을 삭제하시겠습니까?");
@@ -130,6 +135,7 @@ function repDel(rno) {
 	
 }
 
+//좋아요/좋아요 취소 버튼
 function clickLike(bno){
 	if($("#sessionid").val()==""){
 		alert("로그인을 해주세요.")
@@ -175,6 +181,7 @@ function clickLike(bno){
 	}
 }
 
+//팔로우/팔로우 취소 버튼
 function clickfollow(userid){
 	if($("#sessionid").val()==""){
 		alert("로그인을 해주세요.")

@@ -10,18 +10,23 @@ import com.jjb.model.RepBoardVO;
 public interface BoardMapper {
 	// 게시판 리스트
 	public List<BoardVO> boardlist(String name) throws Exception;
-
+	
+	// 게시판 리스트 페이징 처리
 	public List<BoardVO> boardListPaging(Map<String, Object> paramMap) throws Exception;
-
+	
 	// 전체 페이지 개수
 	public int boardCount(Map<String, Object> paramMap) throws Exception;
-
+	
+	//boardDetailList
 	public BoardVO boardDetail(Map<String, Object> paramMap) throws Exception;
-
+	
+	//게시판 글쓰기
 	public void boardWrite(Map<String, Object> paramMap) throws Exception;
-
+	
+	//게시판 글수정
 	public void boardModify(Map<String, Object> paramMap) throws Exception;
-
+	
+	//게시판 글삭제
 	public void boardDelete(Map<String, Object> paramMap) throws Exception;
 
 	// 게시판 댓글 조회

@@ -1,6 +1,7 @@
 /**
  * 
  */
+//이미지 파일이 변경 시 폴더에 이미지 저장 및 이미지 표시
 $(document).ready(function() {
 	$("input[name=file]").change(function() {
 		var form= $("form[name=uploadForm]")[0];

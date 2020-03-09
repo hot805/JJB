@@ -17,6 +17,7 @@ public class MailController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	//메일 보내기위한 메소드
 	@RequestMapping(value = "/mail", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public boolean mailSending(String email, int randomNum) throws Exception{

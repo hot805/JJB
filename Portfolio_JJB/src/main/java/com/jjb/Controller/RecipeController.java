@@ -26,12 +26,14 @@ public class RecipeController {
 		return "board/recipe";
 	}
 	
+	//레시피 작성페이지 이동
 	@RequestMapping(value="/recipeWrite",method=RequestMethod.GET)
 	public String recipeWriteGET() throws Exception{
 		System.out.println("레시피 작성");
 		return "board/recipeWrite";
 	}
 	
+	//레시피 수정 페이지 이동
 	@RequestMapping(value="/recipeModify",method=RequestMethod.GET)
 	public String recipeModifyGET(Model model,BoardVO board) throws Exception{
 		System.out.println("레시피 수정");

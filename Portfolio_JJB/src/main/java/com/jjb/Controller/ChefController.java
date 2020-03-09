@@ -24,7 +24,7 @@ public class ChefController {
 	
 	@Autowired 
 	private ChefService cservice;
-	
+	//½¦ÇÁ ¸®½ºÆ®
 	@RequestMapping(value="/chef", method=RequestMethod.GET)
 	public String chefListGET(Model model, HttpSession session,Criteria cri,BoardVO board) throws Exception {
 		String userid = (String)session.getAttribute("userid");
@@ -53,7 +53,7 @@ public class ChefController {
 		model.addAttribute("activeItem",board.getCategory());
 		return "/board/chef";
 	}
-	
+	//ÆÈ·Î¿ì Ãë¼Ò
 	@ResponseBody
 	@RequestMapping(value="/unfollow", method=RequestMethod.GET)
 	public void unfollowGET(String chef_followed, HttpSession session) throws Exception {		
@@ -63,7 +63,7 @@ public class ChefController {
 		
 		cservice.unfollow(follow);
 	}
-	
+	//ÆÈ·Î¿ì
 	@ResponseBody
 	@RequestMapping(value="/follow", method=RequestMethod.GET)
 	public void followGET(String chef_followed, HttpSession session) throws Exception {

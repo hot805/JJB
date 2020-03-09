@@ -2,6 +2,7 @@
  * 
  */
 
+//이미지 업로드 시 해당 이미지 및 삭제버튼 div안에 추가
 $(document).ready(function(){
 	$("input[value=업로드]").click(function(){
 		var form= $("form[name=uploadForm]")[0];

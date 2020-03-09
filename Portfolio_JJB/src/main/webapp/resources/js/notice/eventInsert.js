@@ -2,6 +2,7 @@
  * 
  */
 
+//이미지 업로드
 $(document).ready(function(){
 	$("input[value=업로드]").click(function(){
 		var form= $("form[name=uploadForm]")[0];

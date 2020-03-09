@@ -78,9 +78,9 @@ public class BoardController {
 		return location;
 	}
 	
+	//글작성 페이지로 이동
 	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String boardWriteGET(BoardVO board, Model model) throws Exception{
-		System.out.println("boardWrite 돌입");
 		String section = board.getSection();
 		String location="";
 		if(section.equals("B4-01") || section.equals("B6-01")) {
@@ -94,6 +94,7 @@ public class BoardController {
 		return location;
 	}
 	
+	//글작성 기본페이지로 이동(공지사항, 이벤트, 문의사항)
 	@RequestMapping(value="/writeBasic",method=RequestMethod.GET)
 	public String writeBasicGET(BoardVO board, Model model) throws Exception{
 		System.out.println("writeBasic 돌입");
@@ -110,6 +111,7 @@ public class BoardController {
 		return location;
 	}
 	
+	//글변경 기본페이지로 이동(공지사항, 이벤트, 문의사항)
 	@RequestMapping(value="/modifyBasic",method=RequestMethod.GET)
 	public String modifyBasicGET(BoardVO board, Model model) throws Exception{
 		System.out.println("modifyBasic 돌입");
@@ -127,6 +129,7 @@ public class BoardController {
 		return location;
 	}
 	
+	//글작성 기본(공지사항, 이벤트, 문의사항)
 	@RequestMapping(value = "/writeBasic", method = RequestMethod.POST)
 	public String boardWriteBasicPOST(BoardVO board, HttpSession session,RedirectAttributes redirect){
 		System.out.println("board : "+board);
@@ -166,9 +169,10 @@ public class BoardController {
 		return "redirect:/index";
 	}
 	
+	//글변경 기본(공지사항, 이벤트, 문의사항)
 	@RequestMapping(value="/modifyBasic",method=RequestMethod.POST)
 	public String modifyBasicPOST(BoardVO board, Model model,RedirectAttributes redirect, HttpSession session){
-		System.out.println("modifyBasic 돌입");
+		System.out.println("modifyBasicPOST");
 		System.out.println("board : "+board);
 		String bsection = "";
 		String fail ="";
@@ -203,7 +207,7 @@ public class BoardController {
 		return "redirect:/index";
 	}
 
-	// 게시판 작성
+	// 게시판 글작성(레시피, 토크)
 	@ResponseBody
 	@RequestMapping(value = "/write", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public void boardWritePOST(BoardVO board, HttpSession session) throws Exception {
@@ -228,7 +232,8 @@ public class BoardController {
 
 		bservice.boardWrite(paramMap);
 	}
-
+	
+	// 게시판 글변경(레시피, 토크)
 	@ResponseBody
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public void boardModifyPOST(BoardVO board) throws Exception {
@@ -248,7 +253,8 @@ public class BoardController {
 		System.out.println("수정 paramMap : "+paramMap);
 		bservice.boardModify(paramMap);
 	}
-
+	
+	//글삭제 게시판 전체
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void boardDeletePOST(BoardVO board) throws Exception {
@@ -284,7 +290,7 @@ public class BoardController {
 	// 공지사항 내부
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String boardDetailGET(Criteria cri, BoardVO board, Model model,HttpSession session) throws Exception {
-		System.out.println("공지사항 디테일쓰");
+		System.out.println("공지사항 디테일");
 		cri.setAmount(15);
 		System.out.println(board);
 		String bsNum = board.getSection();
@@ -359,8 +365,6 @@ public class BoardController {
 	@ResponseBody
 	public void repWritePOST(RepBoardVO reboard) throws Exception {
 		System.out.println("notice 댓글 작성");
-		// String bsNum = reboard.getSection();
-		System.out.println(reboard.getSection());
 		String rsNum = reboard.getSection().replaceFirst("B", "R");
 		String rsection = "";
 		if (rsNum.equals("R4-01")) {
@@ -445,7 +449,8 @@ public class BoardController {
 
 		bservice.repDelete(ParamMap);
 	}
-		
+	
+	//좋아요 취소
 	@ResponseBody
 	@RequestMapping(value="/unlike", method=RequestMethod.GET)
 	public void unlikeGET(BoardVO board, HttpSession session) throws Exception {
@@ -456,6 +461,7 @@ public class BoardController {
 		bservice.unlike(like);
 	}
 	
+	//좋아요
 	@ResponseBody
 	@RequestMapping(value="/like", method=RequestMethod.GET)
 	public void likeGET(BoardVO board, HttpSession session) throws Exception {
@@ -466,12 +472,14 @@ public class BoardController {
 		bservice.like(like);
 	}
 	
+	//이미지 삽입 팝업창 페이지 이동
 	@RequestMapping(value="/insertImg", method = RequestMethod.GET)
 	public String insertImgGET() throws Exception{
 		System.out.println("insertImg 돌입");
 		return "/board/eventInsertImg";
 	}
 	
+	//문의사항 답변
 	@ResponseBody
 	@RequestMapping(value="/help_answer", method = RequestMethod.POST)
 	public void help_answerGET(BoardVO board) throws Exception{

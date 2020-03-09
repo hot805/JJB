@@ -12,7 +12,7 @@ public interface ChefService {
 	//½¦ÇÁ ÆäÀÌÂ¡
 	public List<ChefVO> ChefListPaging(Map<String, Object> paramMap) throws Exception; 
 	
-	//½¦ÇÁ Ä«¿îÅÍ
+	//½¦ÇÁ Ä«¿îÆ®
 	public int ChefCount() throws Exception;
 	
 	// ÆÈ·Î¿ì

@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+//쉐프 권한부여
 function user_grant(userid, nickname, profileImg){
 	$.ajax({
 		url : "user/grantUser",
@@ -17,6 +19,7 @@ function user_grant(userid, nickname, profileImg){
 	})
 }
 
+//쉐프 권한 해제
 function user_revoke(userid){
 	$.ajax({
 		url : "user/revokeUser",
@@ -31,6 +34,7 @@ function user_revoke(userid){
 	})
 }
 
+//회원 탈퇴
 function user_delete(userid){
 	$.ajax({
 		url : "user/deleteUser_admin",

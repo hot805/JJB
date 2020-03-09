@@ -60,7 +60,7 @@
 		<div style="float: right; width: 24%">
 			<ul class="list-group notice_right">
 				<li class="list-group-item"><a href="index?page=/board/&section=B4-01">공지사항</a></li>
-				<li class="list-group-item"><a class="dropdown-toggle" style="cursor:pointer" onclick="openLeft()">이벤트</a></li>
+				<li class="list-group-item"><a class="dropdown-toggle" style="cursor:pointer" onclick="openRight()">이벤트</a></li>
 				<li class="list-group-item left_menu"><a href="index?page=/board/&section=B4-02">진행중인 이벤트</a></li>
 				<li class="list-group-item left_menu"><a href="index?page=/board/&section=B4-03">종료된 이벤트</a></li>
 				<li class="list-group-item left_menu"><a href="index?page=/board/&section=B4-04">이벤트 발표</a></li>

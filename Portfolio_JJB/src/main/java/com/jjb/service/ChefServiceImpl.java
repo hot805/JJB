@@ -15,24 +15,25 @@ public class ChefServiceImpl implements ChefService{
 	@Autowired
 	private ChefMapper cm;
 	
+	//½¦ÇÁ ¸®½ºÆ®
 	@Override
 	public List<ChefVO> ChefList(Map<String, Object> paramMap) throws Exception {
-		// TODO Auto-generated method stub
 		return cm.ChefList(paramMap);
 	}
-
+	
+	//½¦ÇÁ ¸®½ºÆ® ÆäÀÌÂ¡
 	@Override
 	public List<ChefVO> ChefListPaging(Map<String, Object> paramMap) throws Exception {
-		// TODO Auto-generated method stub
 		return cm.ChefListPaging(paramMap);
 	}
 
+	//½¦ÇÁ Ä«¿îÆ®
 	@Override
 	public int ChefCount() throws Exception {
-		// TODO Auto-generated method stub
 		return cm.ChefCount();
 	}
 	
+	//ÆÈ·Î¿ì+ÆÈ·Î¿ì ¼ö °è»ê
 	@Transactional
 	@Override
 	public void follow(Map<String, Object> follow) throws Exception {
@@ -40,6 +41,7 @@ public class ChefServiceImpl implements ChefService{
 		cm.follownum(follow);
 	}
 	
+	//ÆÈ·Î¿ì Ãë¼Ò+ÆÈ·Î¿ì ¼ö °è»ê
 	@Transactional
 	@Override
 	public void unfollow(Map<String, Object> follow) throws Exception {

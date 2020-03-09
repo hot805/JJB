@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjb.mapper.ChefMapper">
-
+	
+	<!-- 쉐프 페이징 -->
 	<select id="chefListPaging" resultType="com.jjb.model.ChefVO">
 		select a.rownum, a.chefno, a.userid, a.nickname, a.followno, a.regdate, a.profileImg,
 		case when (a.userid = any (select chef_followed from follow_user where userid=#{userid}))
@@ -32,6 +33,7 @@
 		desc
 	</select>
 	
+	<!-- 쉐프 리스트 -->
 	<select id="cheflist" resultType="com.jjb.model.ChefVO">
 		select chefno, userid, nickname, followno, tableno, regdate,
 		case when
@@ -54,19 +56,23 @@
 		desc;
 
 	</select>
-
+	
+	<!-- 쉐프 카운트 -->
 	<select id="chefCount" resultType="int">
 		select count(*) from tbl_chef;
 	</select>
 	
+	<!-- 팔로우 -->
 	<insert id="follow">
 		insert into follow_user (userid, chef_followed) values (#{userid}, #{chef_followed});
 	</insert>
 	
+	<!-- 팔로우 취소 -->
 	<delete id="unfollow">
 		delete from follow_user where userid=#{userid} and chef_followed=#{chef_followed};
 	</delete>
 	
+	<!-- 팔로우 수 계산 -->
 	<update id="follownum">
 		update tbl_chef set followno = (select count(*) from follow_user where chef_followed = #{chef_followed}) where userid = #{chef_followed}
 	</update>
