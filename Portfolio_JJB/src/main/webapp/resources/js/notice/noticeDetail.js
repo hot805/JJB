@@ -13,7 +13,6 @@ function repWrite() {
 	var nickname = $("#sessionname").val();
 	var bno = $("#boardnum").val();
 	var section = $("#section").val();
-	alert(section)
 	if (userid == "") {
 		alert("로그인을 해주세요.")
 		return false;
@@ -49,7 +48,6 @@ function repWrite() {
 //댓글 수정창 생성
 function repModi(no, userid) {
 	var replyid = $("#sessionid").val();
-	alert(no + " " + userid)
 
 	$(".forModify" + no).html(
 			"<input type='text' id='forUpdate"+no+"'>"
